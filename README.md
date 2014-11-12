@@ -1,4 +1,0 @@
-projetSteganographie
-====================
-
-Projet semestriel
