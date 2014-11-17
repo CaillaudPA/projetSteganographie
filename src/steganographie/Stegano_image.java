@@ -29,7 +29,7 @@ public class Stegano_image extends Steganographie{
 				for (int y=0;y<enveloppe.getHeight() ;y++ ) {
 					for (int x=0;x<enveloppe.getWidth() ;x++ ) {
 						tmpCouleur = new Color(enveloppe.getRGB(x,y));
-						for (int curseurBit = 0;curseurBit<8 ; curseurBit++) {
+						for (int curseurBit = 0;curseurBit<8 ; curseurBit+=4) {
 							
 						}
 					}
@@ -38,7 +38,8 @@ public class Stegano_image extends Steganographie{
 		}
 
 	}
-	//0xFF070707
+	//mettre en entrer la position du bit que l'on souhaite récupérer 
+	//retourner true si le bit voulue correspond a 1 sinon 0
 	private boolean recupererBit(byte octet, int position){
 		byte tmp = octet;
 		tmp >> position;
