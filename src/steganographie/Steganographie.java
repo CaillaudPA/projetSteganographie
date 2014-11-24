@@ -2,8 +2,8 @@ package steganographie;
 
 public abstract class Steganographie{
 
-	private Lettre lettre;
-	private Enveloppe enveloppe;
+	protected Lettre lettre;
+	protected Enveloppe enveloppe;
 
 	public Steganographie(String l, String e)
 	{

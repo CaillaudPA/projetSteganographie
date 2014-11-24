@@ -1,15 +1,13 @@
 package steganographie;
 
-import classeStatic.*;
-
 public class Lettre{
-	private Object message;
+	private String message;
 
 	public Lettre(String cheminAcces){
-		this.message = GestionFichier.fichierEnObject(cheminAcces);
+		this.message = cheminAcces;
 	}
 
-	public Object getLettre(){
+	public String getLettre(){
 		return message;
 	}
 }

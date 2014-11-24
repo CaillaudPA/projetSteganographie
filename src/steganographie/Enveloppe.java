@@ -1,15 +1,13 @@
 package steganographie;
 
-import classeStatic.*;
-
 public class Enveloppe{
-	private Object enveloppe;
+	private String enveloppe;
 
 	public Enveloppe(String cheminAcces){
-		this.enveloppe = GestionFichier.fichierEnObject(cheminAcces);
+		this.enveloppe = cheminAcces;
 	}
 
-	public Object getEnveloppe(){
+	public String getEnveloppe(){
 		return enveloppe;
 	}
 }
