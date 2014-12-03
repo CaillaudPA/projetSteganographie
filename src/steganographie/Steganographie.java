@@ -13,9 +13,9 @@ public abstract class Steganographie{
 
 	public abstract void dissimulerDonnee(int i);
 
-	public abstract void devoilerDonnee(int i);
+	public abstract void devoilerDonnee(int i,String cheminEnveloppe,String PathLettre);
 
-	public abstract boolean verificationComptabilite();
+	public abstract boolean verificationComptabilite(String cheminAccesATester);
 }
 
 //javac -d bin -cp bin src/steganographie/*.java
