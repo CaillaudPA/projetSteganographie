@@ -10,15 +10,14 @@ public class Stegano_imageTest {
 
 	@Test
 	public void testDissimulerDonnee() {
-		Stegano_image test = new Stegano_image("messageACacher.txt","imageTest2.png");
-		test.dissimulerDonnee(1);
+		Stegano_image test = new Stegano_image("fichierTest/messageACacher.txt","fichierTest/imageTest4.png");
+		test.dissimulerDonnee(1,"fichierTest/imageAvecMessageCacher.png",true,0);
 	}
 
 	@Test
 	public void testDevoilerDonnee() {
 		Stegano_image test = new Stegano_image("","");
-		test.devoilerDonnee(1,"imageAvecMessageCacher.png","MessageDevoiler");
-
+		test.devoilerDonnee(1,"fichierTest/imageAvecMessageCacher.png","fichierTest/MessageDevoiler",false,0);
 	}
 
 	@Test
@@ -30,14 +29,13 @@ public class Stegano_imageTest {
 	public void testRecupererBit() {
 		Stegano_image test = new Stegano_image("","");
 		int tmp = 0xFFFFFFFF; //= 1111 1111
-		System.out.println(test.recupererBit(tmp,32));
-		
+		System.out.println(test.recupererBit(tmp,32));	
 	}
 
 	@Test
 	public void testDecallerBit() {
 		Stegano_image test = new Stegano_image("","");
-		int tmp = 0x47; //= 0100 0111=71
+		int tmp = 0x47; //= 1100 1111=71
 		System.out.println(test.decallerBit(tmp));
 		//0x46= 0100 0110=70
 	}
@@ -67,7 +65,7 @@ public class Stegano_imageTest {
 	@Test
 	public void testOctetsEnInteger() {
 		Stegano_image test = new Stegano_image("","");
-		byte[] tmp = test.intEnQuatreOctets(9999);
+		byte[] tmp = test.intEnQuatreOctets(207);
 		System.out.println("test OctetsEnInteger: "+test.octetsEnInteger(tmp));
 	}
 	

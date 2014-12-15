@@ -24,16 +24,31 @@ public class Stegano_image extends Steganographie{
 
 	//i le numeros de l'algo a utilisé
 	//1= remplacer le bit de poids faible de chaque couleur
-	public void dissimulerDonnee(int i){
+	public void dissimulerDonnee(int i,String cheminEnveloppeModifier, boolean compresserLettre, int chiffreLettre){
 		if ((i == 1) && (this.verificationComptabilite(this.enveloppe.getEnveloppe())) ) {
 			try{
 				BufferedImage enveloppe = ImageIO.read(new File(this.enveloppe.getEnveloppe()));				
 				byte[] lettre = GestionFichier.fichierEnFlux(this.lettre.getLettre());
 				
+				if(chiffreLettre!=0){
+					lettre = Cryptage.chiffrement(lettre, intEnQuatreOctets(chiffreLettre));
+				}
+
+				if(compresserLettre){
+					System.out.println(lettre.length);
+					lettre = Compresser.compression(lettre);
+					System.out.println(lettre.length);
+				}
+
+				
 				//ajout de 16 bits car 16+32 = 48 et 48 est un nombre commun dans la table de mutliplication de 6 et 8
 				lettre = this.insererTableau(intEnQuatreOctets(lettre.length+(tailleTotalReserver/8)),lettre);
 				lettre = this.insererTableau(octetsReserver,lettre);
+				
 				int[] lettreEnSuiteDeBits = this.bytesEnInt(lettre);
+				
+				
+
 				
 				
 				int curseurBit = 0;
@@ -82,13 +97,13 @@ public class Stegano_image extends Steganographie{
 					}
 				}
 
-				System.out.println("taille Lettre: "+lettreEnSuiteDeBits.length);
+				System.out.println("taille Lettre en bits: "+lettreEnSuiteDeBits.length);
 				
 
 				//on r�cup�re l'extension du nom de l'enveloppe
 				String[] tmpString = this.enveloppe.getEnveloppe().split("\\.");
 				//tmpString[0] correspond au nom du fichier, tmpString[1] a l'extension du fichier
-				File outputfile = new File("imageAvecMessageCacher."+tmpString[1]);
+				File outputfile = new File(cheminEnveloppeModifier);
 				ImageIO.write(enveloppe, tmpString[1], outputfile);
 			}catch(Exception e){
 				System.out.println("erreur: "+e.toString());
@@ -140,7 +155,7 @@ public class Stegano_image extends Steganographie{
 	public int octetsEnInteger(byte[] octets){
 		int aRetourner = 0;
 		for(int i =octets.length-1;i>=0;i--){
-			aRetourner = (aRetourner << 8)| octets[i];
+			aRetourner = (aRetourner << 8)| (octets[i] & 0xFF);
 		}
 		return aRetourner;
 	}
@@ -151,7 +166,7 @@ public class Stegano_image extends Steganographie{
 			Image img = ImageIO.read(new File(cheminAccesATester));
 			BufferedImage envTest = (BufferedImage)img;
 			int nbrPixel = envTest.getHeight()*envTest.getWidth();
-			if( (nbrPixel/4) >= GestionFichier.fichierEnFlux(this.lettre.getLettre()).length ){
+			if( (nbrPixel/3) >= GestionFichier.fichierEnFlux(this.lettre.getLettre()).length+tailleTotalReserver ){
 				String[] tmpString = cheminAccesATester.split("\\.");
 				if (tmpString.length ==2 ){
 					aRetourner = true;
@@ -169,7 +184,7 @@ public class Stegano_image extends Steganographie{
 	}
 
 	@Override
-	public void devoilerDonnee(int i,String cheminEnveloppe,String PathLettre) {
+	public void devoilerDonnee(int i,String cheminEnveloppe,String cheminLettre,boolean lettreCompresser, int lettreChiffre) {
 		if(i==1){
 			try{
 				BufferedImage enveloppe = ImageIO.read(new File(cheminEnveloppe));				
@@ -276,13 +291,19 @@ public class Stegano_image extends Steganographie{
 					}
 				}
 				byte[] fichierCacher = intEnBytes(fichierCacherBits);
+				if(lettreCompresser){
+					fichierCacher = Compresser.decompression(fichierCacher);
+				}
 				
+				if(lettreChiffre!=0){
+					fichierCacher = Cryptage.deChiffrement(fichierCacher, intEnQuatreOctets(lettreChiffre));
+				}
 
 				for(int ii = 0;ii<fichierCacher.length;ii++){
 					System.out.println("test: "+fichierCacher[ii]+" numeros de l'octets: "+ii);
 				}
-				System.out.println(tailleLettre+6);
-				GestionFichier.fluxEnFichier(PathLettre, fichierCacher);
+				System.out.println("taille de la lettre: "+(tailleLettre+6));
+				GestionFichier.fluxEnFichier(cheminLettre, fichierCacher);
 			}catch(Exception e){
 				System.out.println(e);
 			}

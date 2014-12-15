@@ -1,5 +1,7 @@
 package classeStatic;
 
+import java.io.File;
+
 public class Compresser{
 	
 	public static byte[] compression(byte[] fluxACompresser){
@@ -8,7 +10,10 @@ public class Compresser{
 			GestionFichier.fluxEnFichier("fichierTemporaire/fichierACompresserTemporaire",fluxACompresser);
 			Runtime.getRuntime().exec("gzip -9 fichierTemporaire/fichierACompresserTemporaire");
 			//attente de compression
-			Thread.sleep((fluxACompresser.length/1000)+1000);
+			while(! (new File("fichierTemporaire/fichierACompresserTemporaire.gz").exists())){
+				Thread.sleep(100);
+			}
+			//Thread.sleep((fluxACompresser.length/1000)+1000);
 			aRetourner = GestionFichier.fichierEnFlux("fichierTemporaire/fichierACompresserTemporaire.gz");
 			Runtime.getRuntime().exec("rm fichierTemporaire/fichierACompresserTemporaire.gz");
 		} catch (Exception e) {
@@ -22,8 +27,10 @@ public class Compresser{
 		try{
 			GestionFichier.fluxEnFichier("fichierTemporaire/fichierADecompresserTemporaire.gz",fluxADecompresser);
 			Runtime.getRuntime().exec("gzip -d fichierTemporaire/fichierADecompresserTemporaire.gz");
-			//attente de décompression
-			Thread.sleep((fluxADecompresser.length/1000)+1000);
+			//attente de dï¿½compression
+			while(! (new File("fichierTemporaire/fichierADecompresserTemporaire").exists())){
+				Thread.sleep(100);
+			}			
 			aRetourner = GestionFichier.fichierEnFlux("fichierTemporaire/fichierADecompresserTemporaire");
 			Runtime.getRuntime().exec("rm fichierTemporaire/fichierADecompresserTemporaire");
 		} catch (Exception e) {

@@ -11,9 +11,9 @@ public abstract class Steganographie{
 		this.enveloppe = new Enveloppe(e);
 	}
 
-	public abstract void dissimulerDonnee(int i);
+	public abstract void dissimulerDonnee(int i,String cheminEnveloppeModifier, boolean compresserLettre,int chiffreLettre);
 
-	public abstract void devoilerDonnee(int i,String cheminEnveloppe,String PathLettre);
+	public abstract void devoilerDonnee(int i,String cheminEnveloppe,String PathLettre, boolean lettreCompresser, int lettreChiffre);
 
 	public abstract boolean verificationComptabilite(String cheminAccesATester);
 }
