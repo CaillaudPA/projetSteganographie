@@ -1,0 +1,91 @@
+\documentclass[a4paper, titlepage]{report}
+
+\usepackage[utf8]{inputenc} % accents
+\usepackage[T1]{fontenc}      % caractères français
+\usepackage{geometry}         % marges
+\usepackage[francais]{babel}  % langue
+\usepackage{graphicx}         % images
+\usepackage{verbatim}         % texte préformaté
+\usepackage{listings}
+\usepackage{moreverb}
+
+\title{Rapport - Stéganographie}      % renseigne le titre
+\author{Jezequel Corentin - Saingre Dimitri - Beaulieu Loic - Caillaud Pierre-Antoine}%""l'auteur
+\date{16 Janvien 2015}           %   "   "   la future date de parution
+
+\pagestyle{headings}          % affiche un rappel discret (en haut à gauche)
+                              % de la partie dans laquel on se situe
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}
+\newcommand{\hsp}{\hspace{20pt}}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\begin{document}
+
+\begin{titlepage}
+  \begin{sffamily}
+  \begin{center}
+
+    % Upper part of the page. The '~' is needed because \\
+    % only works if a paragraph has started.
+    \includegraphics[scale=1]{univnantes.png}~\\[1.5cm]
+
+    \textsc{\LARGE IUT de Nantes}\\[2cm]
+
+    \textsc{\LargeRapport Stéganographie}\\[1.5cm]
+
+    % Title
+    \HRule \\[0.4cm]
+    { \huge \bfseries Projet \\[0.4cm] }
+
+    \HRule \\[2cm]
+    
+    \\[2cm]
+
+    % Author and supervisor
+    \begin{minipage}{0.4\textwidth}
+      \begin{flushleft} \large
+        Dimitri Saingre\\
+        Corentin Jezequel\\
+        Beaulieu Loic\\
+        Pierre-Antoine Caillaud\\
+        Info 2 Groupe 3\\
+      \end{flushleft}
+    \end{minipage}
+    \begin{minipage}{0.4\textwidth}
+      \begin{flushleft} \large
+        \emph{Professeur :} S. Faucou
+      \end{flushleft}
+    \end{minipage}
+
+    \vfill
+
+    % Bottom of the page
+    {\large 16 janvier 2015}
+
+
+  \end{center}
+  \end{sffamily}
+\end{titlepage}
+
+\chapter*{Introduction}
+
+  \section*{Définition de la stéganogaphie}
+
+    \paragraph{La stéganographie est l'art de la dissimulation, au contraire de la cryptographie qui consiste à rendre un message inintelligible. Le but de la stéganographie est de dissimuler un message dans un autre message. Pour exemple, la stéganographie consisterait à enterrer son argent dans son jardin, alors que la cryptographie consisterait à mettre son argent dans un coffre fort}
+
+  \section{Présentation du projet}
+
+    \paragraph{Nous avons plusieurs tâches à réaliser pour mener ce projet à bien. Nous avons eu pour consigne : \newline - Semestre 3 : Réalisation d'un logiciel de stéganographie offrant le choix parmi plusieurs (au moins deux) algorithmes \newline - Semestre 4 : Portage du logiciel sur Android  Développement d'un module de chiffrement symétrique (AES) au sein du logiciel. \newline Au moment où ce rapport est écrit, nous sommes au semestre 3 et nous allons faire une présentation de ce qui a été fait pour le moment.}
+
+  \section{Division du travail}
+
+    \paragraph{Le travail du semestre 3 a été diviser en deux. Deux équipes ont été formées. \newline Loic et Pierre-Antoine : conception d'un programme en Java permettant de cacher du texte dans une image. \newline Dimitri et Corentin : à compléter \newline \newline Nous allons commencer par vous présenter le programme permettant de cacher du texte dans des images.}
+
+
+\chapter{}
+
+
+\end{document}
+
+
